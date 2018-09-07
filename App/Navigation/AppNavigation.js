@@ -10,7 +10,7 @@ const PrimaryNav = StackNavigator(
     HomeScreen: { screen: HomeScreen }
   },
   {
-    Default config for all screens
+    // Default config for all screens
     cardStyle: {
       backgroundColor: 'transparent'
     },
