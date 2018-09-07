@@ -8,6 +8,7 @@ const REDUX_PERSIST = {
   storeConfig: {
     key: 'primary',
     storage: AsyncStorage,
+    purge: false,
     // Reducer keys that you do NOT want stored to persistence here.
     blacklist: ['login', 'search', 'nav'],
     // Optionally, just specify the keys you DO want stored to persistence.
