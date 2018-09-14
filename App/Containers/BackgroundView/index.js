@@ -3,21 +3,24 @@ import { connect } from 'react-redux'
 import { Metrics } from '../../Themes'
 import { ScrollView, Text, Image, View, Animated } from 'react-native'
 import Actions from '../../Redux/BackgroundRedux'
-// import {updateSetBGHeight} from '../../Lib'
+import {setUpdateFunc} from '../../Lib/BGControl'
 
 // Styles
 import styles from './styles'
 
 export class BGView extends PureComponent {
   state = {
-    height: new Animated.Value(Metrics.screenHeight / 2)
+    height: new Animated.Value(Metrics.screenHeight / 2),
+    elevation: new Animated.Value(0)
   }
 
   componentDidMount () {
-    // updateSetBGHeight(this.setHeight)
+    setUpdateFunc('height', this.setHeight)
+    setUpdateFunc('elevation', this.setElevation)
   }
 
   setHeight = height => this.state.height.setValue(height)
+  setElevation = elevation => this.state.elevation.setValue(elevation)
 
   render () {
     return (
@@ -28,8 +31,8 @@ export class BGView extends PureComponent {
           left: 0,
           right: 0,
           height: this.state.height,
-          zIndex: this.props.elevation,
-          elevation: this.props.elevation,
+          zIndex: this.state.elevation,
+          elevation: this.state.elevation,
           backgroundColor: 'cyan'
         }}
       />

@@ -4,12 +4,12 @@ const { width, height } = Dimensions.get('window')
 
 // Used via Metrics.baseMargin
 const metrics = {
-  marginHorizontal: 10,
-  marginVertical: 10,
+  marginHorizontal: 12,
+  marginVertical: 12,
   section: 25,
-  baseMargin: 10,
-  doubleBaseMargin: 20,
-  smallMargin: 5,
+  baseMargin: 12,
+  doubleBaseMargin: 24,
+  smallMargin: 6,
   doubleSection: 50,
   horizontalLineHeight: 1,
   screenWidth: width < height ? width : height,

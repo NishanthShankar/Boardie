@@ -6,6 +6,11 @@ import Colors from './Colors'
 // Similar to an XML fragment layout in Android
 
 const ApplicationStyles = {
+  flexCenter: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   screen: {
     mainContainer: {
       flex: 1,
