@@ -7,7 +7,9 @@ import ReduxPersist from '../Config/ReduxPersist'
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
-  bg: require('./BackgroundRedux').reducer
+  bg: require('./BackgroundRedux').reducer,
+  bgg: require('./BGGRedux').reducer,
+  persisted: require('./PersistedRedux').reducer
 })
 
 export default () => {

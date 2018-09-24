@@ -10,7 +10,8 @@ import styles from './styles'
 
 export class BGView extends PureComponent {
   state = {
-    height: new Animated.Value(Metrics.screenHeight / 2),
+    // height: new Animated.Value(Metrics.screenHeight / 2),
+    height: new Animated.Value(92),
     elevation: new Animated.Value(0)
   }
 
@@ -33,7 +34,7 @@ export class BGView extends PureComponent {
           height: this.state.height,
           zIndex: this.state.elevation,
           elevation: this.state.elevation,
-          backgroundColor: 'cyan'
+          backgroundColor: 'black'
         }}
       />
     )

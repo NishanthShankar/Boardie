@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import EventItem from '../../Components/EventItem'
+import * as Progress from 'react-native-progress'
+
 import { Metrics } from '../../Themes'
 import { getUpdateFunc } from '../../Lib/BGControl'
 
@@ -54,7 +56,9 @@ class HomeView extends Component {
     return (
       <View style={[styles.mainContainer]}>
         <ScrollView onScroll={this.onScroll}>
-          <View style={{ height: 200 }} />
+          <View style={{ height: 200, justifyContent: 'center', alignItems: 'center' }} >
+            <Progress.Circle size={124} progress={0.4} thickness={6} />
+          </View>
           <EventItem />
           <View
             style={{
