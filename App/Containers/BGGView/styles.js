@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { Metrics, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   // ...ApplicationStyles,
@@ -8,8 +8,6 @@ export default StyleSheet.create({
     backgroundColor: 'transparent'
   },
   searchbar: {
-    elevation: 3,
-    height: 96,
     paddingHorizontal: 8,
     backgroundColor: '#fff',
     borderRadius: 4
