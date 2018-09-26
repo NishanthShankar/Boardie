@@ -1,8 +1,8 @@
-import { call, put } from 'redux-saga/effects'
+import { put } from 'redux-saga/effects'
 import { parseString } from 'react-native-xml2js'
 
 import Actions from '../Redux/BGGRedux'
-import PersistedActions from '../Redux/PersistedRedux'
+// import PersistedActions from '../Redux/PersistedRedux'
 import { collectionToGameList, makeBGGError, searchToList } from '../Transforms/BGGTransforms'
 const baseURL = 'https://www.boardgamegeek.com/xmlapi'
 const collectionURL = `${baseURL}/collection`
@@ -29,7 +29,7 @@ export function * getGameCollection (action) {
     const error = result.errors.error[0].message[0]
     return yield put(Actions.bggCollectionFailure(error))
   }
-  yield put(PersistedActions.setItem('bggGames', collectionToGameList(result)))
+  yield put(Actions.bggCollectionSuccess(collectionToGameList(result)))
 }
 
 export function * searchGame (action) {

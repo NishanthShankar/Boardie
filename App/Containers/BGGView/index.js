@@ -1,22 +1,56 @@
 import React, { Component } from 'react'
 import { View, Image, Text, TextInput, Animated, FlatList } from 'react-native'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import BGGActions from '../../Redux/BGGRedux'
+import PersistedActions from '../../Redux/PersistedRedux'
 import Touchable from '../../Components/Touchable'
 import styles from './styles'
 
 // Seachbar heights 56, 96, no whites
 class BGGView extends Component {
-  progress = new Animated.Value(0)
+  progress = new Animated.Value(this.props.bggId ? 1 : 0)
   height = new Animated.Value(56)
   textInputRef = React.createRef()
-  state = {}
-  renderGames = ({ item: { thumbnail } }) => {
+  state = {
+    bggId: this.props.bggId
+  }
+
+  componentWillReceiveProps (nextProps, nextState) {
+    if (nextProps.bggId && !this.props.bggId) {
+      Animated.timing(this.progress, { toValue: 1 }).start()
+      this.setState({ bggId: nextProps.bggId })
+    }
+  }
+
+  componentWillUnmount () {
+    if (this.confirmed || this.props.bggId) return
+    this.props.setBggGames([])
+  }
+
+  renderGames = ({ item: { thumbnail, title, yearPublished } }) => {
+    if (!thumbnail) {
+      return (
+        <View
+          style={{
+            borderRadius: 4,
+            borderWidth: 4,
+            backgroundColor: '#fafafa',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 176,
+            width: 132,
+            margin: 6
+          }}
+        >
+          <Text style={styles.gameName}>{title}</Text>
+          <Text style={styles.gameName}>({yearPublished})</Text>
+        </View>
+      )
+    }
     return (
-      <View
-        style={{ flexDirection: 'row', borderRadius: 4, overflow: 'hidden' }}
-      >
+      <View style={{ borderRadius: 4, overflow: 'hidden' }}>
         <Image
           source={{ uri: thumbnail }}
           style={{
@@ -41,7 +75,9 @@ class BGGView extends Component {
   }
 
   onEdit = _ => {
-    Animated.timing(this.progress, { toValue: 0 }).start()
+    Animated.timing(this.progress, { toValue: 0 }).start(() => {
+      this.setState({ bggId: '' })
+    })
   }
 
   onChangeText = bggId => this.setState({ bggId })
@@ -51,18 +87,29 @@ class BGGView extends Component {
   }
 
   onConfirm = _ => {
+    this.props.setBggId(this.state.bggId)
+    this.props.setBggGames(this.props.games)
+    this.confirmed = true
     Animated.timing(this.progress, { toValue: 1 }).start()
     Animated.timing(this.height, { toValue: 56 }).start()
   }
 
   onCancel = _ => Animated.timing(this.height, { toValue: 56 }).start()
 
-  onSubmit = _ => Animated.timing(this.height, { toValue: 100 }).start()
+  onSubmit = _ => {
+    this.props.getCollection(this.state.bggId)
+    Animated.timing(this.height, { toValue: 100 }).start()
+  }
 
   render () {
     let textColor = this.progress.interpolate({
       inputRange: [0, 1],
       outputRange: ['#000', '#fff']
+    })
+
+    const fontSize = this.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [24, 34]
     })
 
     const backgroundColor = this.progress.interpolate({
@@ -110,7 +157,9 @@ class BGGView extends Component {
             onPress={this.focus}
             style={{ height: 56, flexDirection: 'row', alignItems: 'center' }}
           >
-            <Animated.Text style={[styles.titleText, { color: textColor }]}>
+            <Animated.Text
+              style={[styles.titleText, { fontSize, color: textColor }]}
+            >
               {bggId}
             </Animated.Text>
             <Touchable
@@ -123,19 +172,27 @@ class BGGView extends Component {
               }}
             />
           </Touchable>
-          <View style={{ height: 44, alignItems: 'center', flexDirection: 'row' }}>
-            <View style={{flex: 1}}>
+          <View
+            style={{ height: 44, alignItems: 'center', flexDirection: 'row' }}
+          >
+            <View style={{ flex: 1 }}>
               <Text>IS THIS YOU GAMER LIST</Text>
             </View>
-            <Touchable onPress={this.onCancel} style={{height: 44, width: 44, backgroundColor: '#f7f7f7'}} />
-            <Touchable onPress={this.onConfirm} style={{height: 44, width: 44, backgroundColor: '#f7f7f7'}} />
+            <Touchable
+              onPress={this.onCancel}
+              style={{ height: 44, width: 44, backgroundColor: '#f7f7f7' }}
+            />
+            <Touchable
+              onPress={this.onConfirm}
+              style={{ height: 44, width: 44, backgroundColor: '#f7f7f7' }}
+            />
           </View>
         </Animated.View>
         <FlatList
           ListHeaderComponent={() => <View style={{ height: 12 }} />}
           style={{ alignSelf: 'center' }}
           numColumns={2}
-          data={this.props.bggGames}
+          data={this.props.games}
           renderItem={this.renderGames}
         />
 
@@ -144,12 +201,19 @@ class BGGView extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  bggGames: state.persisted.bggGames || []
-})
+const mapStateToProps = state => {
+  return {
+    bggId: state.persisted.bggId,
+    games: !_.isEmpty(state.bgg.data)
+      ? state.bgg.data
+      : _.get(state, 'persisted.bggGames', [])
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
-  getCollection: id => dispatch(BGGActions.bggCollectionRequest(id))
+  getCollection: id => dispatch(BGGActions.bggCollectionRequest(id)),
+  setBggId: id => dispatch(PersistedActions.setItem('bggId', id)),
+  setBggGames: data => dispatch(PersistedActions.setItem('bggGames', data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BGGView)

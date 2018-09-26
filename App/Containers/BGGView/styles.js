@@ -31,6 +31,12 @@ export default StyleSheet.create({
     bottom: 56,
     justifyContent: 'center'
   },
+  gameName: {
+    ...Fonts.style.h6,
+    marginHorizontal: 4,
+    textAlign: 'center',
+    color: '#333'
+  },
   titleText: {
     ...Fonts.style.h1,
     color: '#fff'

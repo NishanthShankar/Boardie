@@ -1,12 +1,13 @@
 import _ from 'lodash'
 
 export const collectionToGameList = collection => {
+  console.tron.log('LIST:', collection)
   const finalCollection = _.map(collection.items.item, game => ({
     id: game.$.objectid,
-    title: game.name[0]._,
-    yearPublished: game.yearpublished[0],
-    image: game.image[0],
-    thumbnail: game.thumbnail[0]
+    title: _.get(game, 'name.0._', ''),
+    yearPublished: _.get(game, 'yearpublished.0', ''),
+    image: _.get(game, 'image.0', ''),
+    thumbnail: _.get(game, 'thumbnail.0', '')
   }))
   return finalCollection
 }
