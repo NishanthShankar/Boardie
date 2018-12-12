@@ -60,33 +60,6 @@ class HomeView extends Component {
             <Progress.Circle size={124} progress={0.4} thickness={6} />
           </View>
           <EventItem />
-          <View
-            style={{
-              zIndex: 3,
-              margin: 24,
-              height: 172,
-              backgroundColor: 'white',
-              elevation: 3
-            }}
-          />
-          <View
-            style={{
-              zIndex: 3,
-              margin: 24,
-              height: 172,
-              backgroundColor: 'white',
-              elevation: 3
-            }}
-          />
-          <View
-            style={{
-              zIndex: 3,
-              margin: 24,
-              height: 172,
-              backgroundColor: 'white',
-              elevation: 3
-            }}
-          />
         </ScrollView>
       </View>
     )

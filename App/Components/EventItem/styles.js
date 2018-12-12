@@ -8,8 +8,7 @@ export default {
     paddingBottom: 0,
     padding: Metrics.baseMargin,
     elevation: 3,
-    zIndex: 3,
-    height: 212
+    zIndex: 3
   },
   contentContainer: {
     flex: 1,
@@ -18,7 +17,6 @@ export default {
   },
   titleContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
     justifyContent: 'space-between'
   },
   title: {
@@ -36,12 +34,13 @@ export default {
     marginBottom: 4
   },
   time: {
+    marginLeft: 4,
     ...Fonts.style.h7,
     color: '#333',
     textAlign: 'right'
   },
   subTitle: {
-    ...Fonts.style.small,
+    ...Fonts.style.description, 
     color: '#888'
   },
   ctaContainer: {

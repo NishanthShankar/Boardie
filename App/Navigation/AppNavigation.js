@@ -26,7 +26,7 @@ const PrimaryNav = StackNavigator(
       }
     }),
     headerMode: 'none',
-    initialRouteName: 'BGGView',
+    initialRouteName: 'HomeScreen',
     navigationOptions: {
       headerStyle: styles.header
     }

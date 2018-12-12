@@ -10,8 +10,8 @@ import styles from './styles'
 
 export class BGView extends PureComponent {
   state = {
-    // height: new Animated.Value(Metrics.screenHeight / 2),
-    height: new Animated.Value(92),
+    height: new Animated.Value(Metrics.screenHeight / 2),
+    // height: new Animated.Value(92),
     elevation: new Animated.Value(0)
   }
 
