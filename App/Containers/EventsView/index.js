@@ -25,8 +25,7 @@ const interpolate = ({ inputRange, outputRange, clamp, x }) => {
 
 class HomeView extends Component {
   state = {
-    scroll: new Animated.Value(0),
-    opacity: 1
+    scroll: new Animated.Value(0)
   }
   onScroll = ({ nativeEvent }) => {
     const x = nativeEvent.contentOffset.y
@@ -53,10 +52,7 @@ class HomeView extends Component {
     // this.refs.bg.setHeight(height)
   }
 
-  onExpand = () => {
-    this.setState({opacity: 0}) 
-  }
-  onClose = () => this.setState({opacity: 1})
+  onExpand = () => this.setState({opacity: 0})
 
   render () {
     return (
@@ -65,13 +61,10 @@ class HomeView extends Component {
           <View style={{ height: 200, justifyContent: 'center', alignItems: 'center' }} >
             <Progress.Circle size={124} progress={0.4} thickness={6} />
           </View>
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
-          <EventItem onExpand={this.onExpand} onClose={this.onClose} />
+          <EventItem onExpand={this.onExpand} />
+          <EventItem />
+          <EventItem />
+          <EventItem />
         </ScrollView>
       </View>
     )

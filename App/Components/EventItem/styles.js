@@ -52,6 +52,6 @@ export default {
     height: 24,
     width: 24,
     backgroundColor: '#eee',
-    marginRight: 12
+    marginRight: 4
   }
 }

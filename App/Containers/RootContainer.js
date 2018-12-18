@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 import BGView from '../Containers/BackgroundView'
+import NavBar from '../Components/NavBar'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
@@ -23,6 +24,7 @@ class RootContainer extends Component {
         <StatusBar barStyle='light-content' />
         <BGView />
         <ReduxNavigation />
+        <NavBar />
       </View>
     )
   }

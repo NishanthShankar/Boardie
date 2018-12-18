@@ -1,5 +1,4 @@
 import { StackNavigator } from 'react-navigation'
-import LaunchScreen from '../Containers/LaunchScreen'
 import HomeScreen from '../Containers/HomeView'
 import AddGames from '../Containers/AddGames'
 import ProfileView from '../Containers/ProfileView'

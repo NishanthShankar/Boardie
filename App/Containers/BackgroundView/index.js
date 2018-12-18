@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Metrics } from '../../Themes'
 import { ScrollView, Text, Image, View, Animated } from 'react-native'
 import Actions from '../../Redux/BackgroundRedux'
-import {setUpdateFunc} from '../../Lib/BGControl'
+import { setUpdateFunc } from '../../Lib/BGControl'
 
 // Styles
 import styles from './styles'
@@ -17,9 +17,11 @@ export class BGView extends PureComponent {
 
   componentDidMount () {
     setUpdateFunc('height', this.setHeight)
+    setUpdateFunc('animatedHeight', this.animateToHeight)
     setUpdateFunc('elevation', this.setElevation)
   }
-
+  animateToHeight = toValue =>
+    Animated.timing(this.state.height, { toValue }).start()
   setHeight = height => this.state.height.setValue(height)
   setElevation = elevation => this.state.elevation.setValue(elevation)
 
@@ -47,4 +49,7 @@ const mapDispatchToProps = dispatch => ({
   setHeightFunction: func => dispatch(Actions.setHeightFunction(func))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(BGView)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BGView)
