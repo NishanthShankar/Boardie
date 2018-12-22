@@ -11,6 +11,7 @@ const size = {
   h4: 26,
   h5: 20,
   h6: 19,
+  h7: 16,
   input: 18,
   regular: 17,
   medium: 14,
@@ -42,6 +43,10 @@ const style = {
   h6: {
     fontFamily: type.base,
     fontSize: size.h6
+  },
+  h7: {
+    fontFamily: type.base,
+    fontSize: size.h7
   },
   normal: {
     fontFamily: type.base,

@@ -10,6 +10,12 @@ export default {
     elevation: 3,
     zIndex: 3
   },
+  expandedContainer: {
+    position: 'absolute',
+    paddingBottom: 0,
+    elevation: 3,
+    backgroundColor: '#fff8'
+  },
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -17,10 +23,13 @@ export default {
   },
   titleContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    position: 'absolute',
+    left: 68,
+    top: 12,
+    right: 12
   },
   title: {
-    ...Fonts.style.h5,
+    ...Fonts.style.medium,
     color: '#333'
   },
   number: {
@@ -29,24 +38,39 @@ export default {
   },
   date: {
     ...Fonts.style.h6,
-    color: '#333',
-    textAlign: 'right',
-    marginBottom: 4
+    color: '#282828'
   },
   time: {
-    marginLeft: 4,
     ...Fonts.style.h7,
-    color: '#333',
-    textAlign: 'right'
+    color: '#282828'
+  },
+  location: {
+    marginTop: 2,
+    ...Fonts.style.h7,
+    color: '#282828'
   },
   subTitle: {
-    ...Fonts.style.description, 
+    ...Fonts.style.description,
     color: '#888'
   },
   ctaContainer: {
     height: 48,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
+    left: 12,
+    bottom: 0,
+    right: 12
+  },
+  logo: {
+    position: 'absolute',
+    top: 12,
+    left: 12,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'blue',
+    marginRight: 8
   },
   icon: {
     height: 24,

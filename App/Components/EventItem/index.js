@@ -100,42 +100,73 @@ export default class EventItem extends Component {
               right,
               bottom,
               top,
-              elevation: 3,
-              position: 'absolute',
-              backgroundColor: '#fff8'
+              padding: 12,
+              ...styles.expandedContainer
             }}
           >
-            <View
-              style={{
-                position: 'absolute',
-                top: 12,
-                left: 12,
-                width: 48,
-                height: 48,
-                borderRadius: 24,
-                backgroundColor: 'blue',
-                marginRight: 8
-              }}
-            />
-            <View style={{ position: 'absolute', left: 68, top: 12 }}>
-              <Animated.Text style={[styles.title, { fontSize }]}>
+            <View style={styles.logo} />
+            <View style={styles.titleContainer}>
+              <Animated.Text style={[styles.title]} numberOfLines={1}>
                 Meeples Meet
               </Animated.Text>
             </View>
-            <View style={[styles.titleContainer, {position: 'absolute', right: 12, left: 68, top: 38}]}>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.subTitle}>Dialogues Cafe, Koramangala</Text>
-              </View>
-              <Text style={styles.time}>3PM - 11PM</Text>
-            </View>
-            <this.renderCta
-              style={{ position: 'absolute', left: 12, bottom: 0, right: 12 }}
-            />
+            <this.renderTime />
+            <this.renderLocation />
+            <this.renderInfo />
+            <this.renderCta />
           </Animated.View>
         </View>
       </Modal>
     )
   }
+
+  renderTime = props => (
+    <View
+      style={{
+        top: 24,
+        left: 56,
+        flexDirection: 'row',
+        alignItems: 'flex-end'
+      }}
+    >
+      <Text style={styles.date}>
+        1st Sep
+        <Text style={styles.time}> 7:30 PM to 11:30 PM</Text>
+      </Text>
+    </View>
+  )
+
+  renderLocation = props => (
+    <View style={{top: 44, left: 4, flexDirection: 'row', minHeight: 44}}>
+      <View
+        style={{
+          height: 24,
+          width: 24,
+          borderRadius: 12,
+          backgroundColor: '#ddd',
+          marginRight: 8
+        }}
+      />
+      <Text style={styles.location}>Dialogues Cafe, Koramangala</Text>
+    </View>
+  )
+
+  renderInfo = props => (
+    <View style={{top: 40, left: 4, flexDirection: 'row'}}>
+      <View
+        style={{
+          height: 24,
+          width: 24,
+          borderRadius: 12,
+          backgroundColor: '#ddd',
+          marginRight: 8
+        }}
+      />
+      <Text style={styles.location}>12 Boardies</Text>
+      <View style={{width: 1, backgroundColor: '#ddd', marginHorizontal: 8}}></View>
+      <Text style={styles.location}>24 Games</Text>
+    </View>
+  )
 
   renderCta = props => (
     <View style={[styles.ctaContainer, props.style]}>
@@ -150,7 +181,9 @@ export default class EventItem extends Component {
           paddingVertical: 6
         }}
       >
-        <Text style={{ color: 'white' }}>JOIN</Text>
+        <Text style={{ color: 'white' }} numberOfLines={1}>
+          JOIN
+        </Text>
       </View>
     </View>
   )
@@ -164,57 +197,17 @@ export default class EventItem extends Component {
             activeOpacity={1}
             onLayout={this.onLayout}
             onPress={this.onExpand}
-            style={styles.container}
+            style={[styles.container, { height: 48 + 60 + 120 }]}
           >
-            <View style={{ flexDirection: 'row' }}>
-              <View
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 24,
-                  backgroundColor: 'blue',
-                  marginRight: 8
-                }}
-              />
-              <View style={{ flex: 1 }}>
-                <View style={styles.titleContainer}>
-                  <Text style={styles.title}>Meeples Meet</Text>
-                  <Text style={styles.date}>01 Sep</Text>
-                </View>
-                <View style={styles.titleContainer}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.subTitle}>
-                      Dialogues Cafe, Koramangala
-                    </Text>
-                  </View>
-                  <Text style={styles.time}>3PM - 11PM</Text>
-                </View>
-              </View>
+            <View style={styles.logo} />
+            <View style={styles.titleContainer}>
+              <Animated.Text style={[styles.title]} numberOfLines={1}>
+                Meeples Meet
+              </Animated.Text>
             </View>
-            <View style={styles.contentContainer}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <Text style={styles.number}>2</Text>
-                <Text>GAMERS</Text>
-              </View>
-              <View style={{ width: 2, backgroundColor: '#eee' }} />
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <Text style={styles.number}>24</Text>
-                <Text>GAMES</Text>
-              </View>
-            </View>
-            <View style={{ height: 2, backgroundColor: '#eee' }} />
+            <this.renderTime />
+            <this.renderLocation />
+            <this.renderInfo />
             <this.renderCta />
           </TouchableOpacity>
           <this.renderPrice />
